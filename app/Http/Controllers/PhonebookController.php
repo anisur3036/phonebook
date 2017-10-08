@@ -18,6 +18,11 @@ class PhonebookController extends Controller
         return view('phonebook');
     }
 
+    public function getData()
+    {
+        return Phonebook::orderBy('name', 'ASC')->get();
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -62,7 +67,7 @@ class PhonebookController extends Controller
      */
     public function edit(Phonebook $phonebook)
     {
-        //
+        
     }
 
     /**
@@ -72,9 +77,13 @@ class PhonebookController extends Controller
      * @param  \App\Phonebook  $phonebook
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Phonebook $phonebook)
+    public function update(PhonebookRequest $request, Phonebook $phonebook)
     {
-        //
+        $pb = Phonebook::find($request->id);
+        $pb->name = $request->name;
+        $pb->phone = $request->phone;
+        $pb->email = $request->email;
+        $pb->save();
     }
 
     /**
