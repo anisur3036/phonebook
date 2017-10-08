@@ -26,7 +26,7 @@ class PhonebookRequest extends FormRequest
         return [
             'name' => 'required|max:255',
             'phone' => 'required|max:13|numeric',
-            'email' => 'required|email|unique|phonebooks'
+            'email' => 'required|email'
         ];
     }
 }

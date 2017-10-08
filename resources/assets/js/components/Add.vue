@@ -50,7 +50,7 @@
 					phone:'',
 					email:''
 				},
-				errors: {}
+				errors:{}
 			}
 		},
 		methods:{
