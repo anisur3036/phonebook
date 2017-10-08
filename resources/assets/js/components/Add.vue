@@ -60,7 +60,8 @@
 			},
 			save(){
 				axios.post('/phonebook',this.$data.list).then((response) => {
-					this.close();
+					this.close()
+					this.$parent.lists.push(response.data)
 					this.onSuccess();
 				}).catch((error) => this.errors = error.response.data.errors)
 			},

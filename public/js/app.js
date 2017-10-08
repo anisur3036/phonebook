@@ -42498,6 +42498,7 @@ var Edit = __webpack_require__(57);
 
 			if (confirm("Are you sure ?")) {
 				this.loading = !this.loading;
+
 				axios.delete('/phonebook/' + id).then(function (response) {
 					_this2.lists.splice(key, 1);
 					_this2.loading = !_this2.loading;
@@ -42626,6 +42627,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 			axios.post('/phonebook', this.$data.list).then(function (response) {
 				_this.close();
+				_this.$parent.lists.push(response.data);
 				_this.onSuccess();
 			}).catch(function (error) {
 				return _this.errors = error.response.data.errors;

@@ -79,7 +79,8 @@ let Edit = require('./Edit.vue');
 			}, 
 			del(key, id) {
 				if (confirm("Are you sure ?")) {
-					this.loading = !this.loading
+					this.loading = !this.loading;
+					
 					axios.delete(`/phonebook/${id}`)
 					.then((response) => {
 						this.lists.splice(key, 1);
