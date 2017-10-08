@@ -6,6 +6,9 @@
 		    <button class="button is-primary is-outlined" @click="openAddNew">
 		      Add New
 		    </button>
+		    <span class="is-pulled-right" v-if="loading">
+		    	<i class="fa fa-refresh fa-spin fa-1x fa-fw"></i>
+		    </span>
 		  </p>
 		  <div class="panel-block">
 		    <p class="control has-icons-left">
@@ -20,7 +23,7 @@
 		    	{{ item.name }}
 		    </span>
 		    <span class="panel-icon column is-1">
-		      <i class="has-text-danger fa fa-trash" aria-hidden="true"></i>
+		      <i class="has-text-danger fa fa-trash" aria-hidden="true" @click="del(key, item.id)"></i>
 		    </span>
 		    <span class="panel-icon column is-1">
 		      <i class="has-text-info fa fa-edit" aria-hidden="true" @click="updateDitail(key)"></i>
@@ -48,7 +51,8 @@ let Edit = require('./Edit.vue');
 				showActive: '',
 				showUpdate: '',
 				lists: {},
-				errors: {}
+				errors: {},
+				loading: false
 			}
 		},
 		mounted() {
@@ -72,6 +76,17 @@ let Edit = require('./Edit.vue');
 			},
 			close() {
 				this.addActive = this.showActive = this.showUpdate = ''
+			}, 
+			del(key, id) {
+				if (confirm("Are you sure ?")) {
+					this.loading = !this.loading
+					axios.delete(`/phonebook/${id}`)
+					.then((response) => {
+						this.lists.splice(key, 1);
+						this.loading = !this.loading
+					})
+					.catch((error) => this.errors = error.response.data.errors);
+				}
 			}
 		}
 	}
