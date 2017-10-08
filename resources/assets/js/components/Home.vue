@@ -46,6 +46,7 @@ let Add = require('./Add.vue')
 		methods: {
 			openAddNew() {
 				this.addActive = 'is-active';
+				this.$data.list = ''
 			},
 			close() {
 				this.addActive= '';

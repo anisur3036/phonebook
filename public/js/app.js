@@ -42458,6 +42458,7 @@ var Add = __webpack_require__(43);
 	methods: {
 		openAddNew: function openAddNew() {
 			this.addActive = 'is-active';
+			this.$data.list = '';
 		},
 		close: function close() {
 			this.addActive = '';
@@ -42581,10 +42582,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			var _this = this;
 
 			axios.post('/phonebook', this.$data.list).then(function (response) {
-				return _this.close();
+				_this.close();
+				_this.onSuccess();
 			}).catch(function (error) {
 				return _this.errors = error.response.data.errors;
 			});
+		},
+		onSuccess: function onSuccess(response) {
+			this.list.email = '';
+			this.list.name = '';
+			this.list.phone = '';
 		}
 	}
 });
@@ -42627,7 +42634,7 @@ var render = function() {
               ],
               staticClass: "input",
               class: { "is-danger": _vm.errors.name },
-              attrs: { type: "text", placeholder: "Name" },
+              attrs: { type: "text", name: "name", placeholder: "Name" },
               domProps: { value: _vm.list.name },
               on: {
                 input: function($event) {
@@ -42662,7 +42669,7 @@ var render = function() {
               ],
               staticClass: "input",
               class: { "is-danger": _vm.errors.phone },
-              attrs: { type: "number", placeholder: "Phone" },
+              attrs: { type: "number", name: "phone", placeholder: "Phone" },
               domProps: { value: _vm.list.phone },
               on: {
                 input: function($event) {
@@ -42697,7 +42704,7 @@ var render = function() {
               ],
               staticClass: "input",
               class: { "is-danger": _vm.errors.email },
-              attrs: { type: "email", placeholder: "Email" },
+              attrs: { type: "email", name: "email", placeholder: "Email" },
               domProps: { value: _vm.list.email },
               on: {
                 input: function($event) {
